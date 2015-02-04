@@ -8,6 +8,12 @@
 	<name>minijs-bam Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jackson.version>2.4.3</jackson.version>
+		<tomee-tasks-file-path>${basedir}</tomee-tasks-file-path>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -29,8 +35,38 @@
 			<version>1.1.1</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.11.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+
 	</dependencies>
-	
+
 	<build>
 		<finalName>minijs-bam</finalName>
 		<plugins>
@@ -46,21 +82,23 @@
 						</goals>
 						<configuration>
 							<target>
-								<ant antfile="${tomee-tasks-file-path}/tomee-tasks.xml" target="undeploy" />
-								<ant antfile="${tomee-tasks-file-path}/tomee-tasks.xml" target="deploy" />
+								<ant antfile="${tomee-tasks-file-path}/tomee-tasks.xml"
+									target="undeploy" />
+								<ant antfile="${tomee-tasks-file-path}/tomee-tasks.xml"
+									target="deploy" />
 							</target>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	
-	
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<tomee-tasks-file-path>${basedir}</tomee-tasks-file-path>
-	</properties>
-	
-	
+
 </project>
